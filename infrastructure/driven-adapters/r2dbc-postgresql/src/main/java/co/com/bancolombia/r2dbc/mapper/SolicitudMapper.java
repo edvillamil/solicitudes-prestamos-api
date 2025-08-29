@@ -1,32 +1,35 @@
 package co.com.bancolombia.r2dbc.mapper;
 
-import co.com.bancolombia.model.solicitud.Solicitud;
-import co.com.bancolombia.r2dbc.entities.EstadoEntity;
-import co.com.bancolombia.r2dbc.entities.SolicitudEntity;
-import co.com.bancolombia.r2dbc.entities.TipoPrestamoEntity;
+import co.com.bancolombia.model.solicitud.LoanRequest;
+import co.com.bancolombia.r2dbc.entities.LoanStatusEntity;
+import co.com.bancolombia.r2dbc.entities.LoanRequestEntity;
+import co.com.bancolombia.r2dbc.entities.LoanTypeEntity;
 
 public class SolicitudMapper {
 
-    public static SolicitudEntity toEntity(Solicitud domain) {
-        return SolicitudEntity.builder()
+    public static LoanRequestEntity toEntity(LoanRequest domain) {
+        return LoanRequestEntity.builder()
                 .id(domain.getId())
-                .documentoCliente(domain.getDocumentoCliente())
-                .tipoPrestamoId(domain.getTipoPrestamo().getId())
-                .monto(domain.getMonto())
-                .plazoMeses(domain.getPlazoMeses())
-                .estadoId(domain.getEstado().getId())
-                .fechaCreacion(domain.getFechaCreacion())
+                .documentNumber(domain.getDocumentNumber())
+                .email(domain.getEmail())
+                .loanType(domain.getLoanType().getId())
+                .amount(domain.getAmount())
+                .termMonths(domain.getTermMonths())
+                .statusId(domain.getLoanStatus().getId())
+                .createdAt(domain.getCreatedAt())
                 .build();
     }
 
-    public static Solicitud toDomain(SolicitudEntity entity) {
-        return Solicitud.builder()
-                .documentoCliente(entity.getDocumentoCliente())
-                .tipoPrestamo(TipoPrestamoMapper.toDomain(TipoPrestamoEntity.builder().id(entity.getTipoPrestamoId()).build()))
-                .monto(entity.getMonto())
-                .plazoMeses(entity.getPlazoMeses())
-                .estado(EstadoMapper.toDomain(EstadoEntity.builder().id(entity.getEstadoId()).build()))
-                .fechaCreacion(entity.getFechaCreacion())
+    public static LoanRequest toDomain(LoanRequestEntity entity) {
+        return LoanRequest.builder()
+                .id(entity.getId())
+                .documentNumber(entity.getDocumentNumber())
+                .loanType(TipoPrestamoMapper.toDomain(LoanTypeEntity.builder().id(entity.getLoanType()).build()))
+                .email(entity.getEmail())
+                .amount(entity.getAmount())
+                .termMonths(entity.getTermMonths())
+                .loanStatus(EstadoMapper.toDomain(LoanStatusEntity.builder().id(entity.getStatusId()).build()))
+                .createdAt(entity.getCreatedAt())
                 .build();
     }
 }

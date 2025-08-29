@@ -13,13 +13,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table("tipos_prestamo")
-public class TipoPrestamoEntity {
+@Table("loan_status")
+public class LoanStatusEntity {
 
     @Id
     private UUID id;
-
-    private String nombre;
-
-    private String descripcion;
+    private String name;
+    private String description;
 }

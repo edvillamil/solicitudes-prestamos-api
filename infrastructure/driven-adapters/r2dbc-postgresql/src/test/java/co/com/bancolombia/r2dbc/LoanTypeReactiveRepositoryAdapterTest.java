@@ -15,14 +15,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class EstadoReactiveRepositoryAdapterTest {
+class LoanTypeReactiveRepositoryAdapterTest {
     // TODO: change four you own tests
 
     @InjectMocks
-    EstadoReactiveRepositoryAdapter repositoryAdapter;
+    LoanTypeReactiveRepositoryAdapter repositoryAdapter;
 
     @Mock
-    EstadoReactiveRepository repository;
+    TipoPrestamoReactiveRepository repository;
 
     @Mock
     ObjectMapper mapper;

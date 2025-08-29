@@ -1,19 +1,27 @@
 package co.com.bancolombia.r2dbc.mapper;
 
-import co.com.bancolombia.model.tipoprestamo.TipoPrestamo;
-import co.com.bancolombia.r2dbc.entities.TipoPrestamoEntity;
+import co.com.bancolombia.model.tipoprestamo.LoanType;
+import co.com.bancolombia.r2dbc.entities.LoanTypeEntity;
 
 public class TipoPrestamoMapper {
 
-    public static TipoPrestamoEntity toEntity(TipoPrestamo domain) {
-        return TipoPrestamoEntity.builder()
+    public static LoanTypeEntity toEntity(LoanType domain) {
+        return LoanTypeEntity.builder()
                 .id(domain.getId())
-                .nombre(domain.getNombre())
-                .descripcion(domain.getDescripcion())
+                .name(domain.getName())
+                .description(domain.getDescription())
                 .build();
     }
 
-    public static TipoPrestamo toDomain(TipoPrestamoEntity entity) {
-        return new TipoPrestamo(entity.getId(), entity.getNombre(), entity.getDescripcion());
+    public static LoanType toDomain(LoanTypeEntity entity) {
+        return LoanType.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .amountMin(entity.getAmountMin())
+                .amountMax(entity.getAmountMax())
+                .termMin(entity.getTermMin())
+                .termMax(entity.getTermMax())
+                .rate(entity.getRate())
+                .build();
     }
 }

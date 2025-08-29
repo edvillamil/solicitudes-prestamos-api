@@ -4,12 +4,14 @@ import io.r2dbc.pool.ConnectionPool;
 import io.r2dbc.pool.ConnectionPoolConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
 
 @Configuration
+@ConditionalOnProperty(name = "adapters.r2dbc.enabled", havingValue = "true", matchIfMissing = false)
 public class PostgreSQLConnectionPool {
     /* Change these values for your project */
     public static final int INITIAL_SIZE = 12;

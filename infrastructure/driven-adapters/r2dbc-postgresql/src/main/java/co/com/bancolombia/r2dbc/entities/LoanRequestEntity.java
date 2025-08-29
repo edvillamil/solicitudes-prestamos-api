@@ -7,19 +7,31 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table("estado_solicitud")
-public class EstadoEntity {
+@Table("loan_request")
+public class LoanRequestEntity {
 
     @Id
     private UUID id;
 
-    private String nombre;
+    private String email;
 
-    private String descripcion;
+    private String documentNumber;
+
+    private UUID loanType;
+
+    private BigDecimal amount;
+
+    private Integer termMonths;
+
+    private UUID statusId;
+
+    private LocalDateTime createdAt;
 }

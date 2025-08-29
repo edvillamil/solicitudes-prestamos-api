@@ -1,7 +1,7 @@
 package co.com.bancolombia.r2dbc;
 
 import co.com.bancolombia.model.estado.LoanStatus;
-import co.com.bancolombia.r2dbc.entities.LoanTypeEntity;
+import co.com.bancolombia.r2dbc.entities.LoanStatusEntity;
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
@@ -9,8 +9,8 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 // TODO: This file is just an example, you should delete or modify it
-public interface TipoPrestamoReactiveRepository
-        extends ReactiveCrudRepository<LoanTypeEntity, UUID>, ReactiveQueryByExampleExecutor<LoanTypeEntity> {
+public interface LoanStatusReactiveRepository
+        extends ReactiveCrudRepository<LoanStatusEntity, UUID>, ReactiveQueryByExampleExecutor<LoanStatusEntity> {
 
     Mono<LoanStatus> findByName(String name);
 }
