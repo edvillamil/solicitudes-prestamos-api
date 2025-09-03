@@ -24,7 +24,10 @@ public class SolicitudMapper {
         return LoanRequest.builder()
                 .id(entity.getId())
                 .documentNumber(entity.getDocumentNumber())
-                .loanType(TipoPrestamoMapper.toDomain(LoanTypeEntity.builder().id(entity.getLoanType()).build()))
+                .loanType(TipoPrestamoMapper
+                        .toDomain(LoanTypeEntity.builder()
+                                .id(entity.getLoanType())
+                                .build()))
                 .email(entity.getEmail())
                 .amount(entity.getAmount())
                 .termMonths(entity.getTermMonths())

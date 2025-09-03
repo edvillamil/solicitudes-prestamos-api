@@ -5,8 +5,8 @@ spring:
     name: "solicitudes-prestamos-api"
   r2dbc:
     url: r2dbc:pool:postgresql://localhost:5432/postgres?schema=public
-    username: postgres
-    password: crediyadb
+    username: admin
+    password: admin123
   sql:
     init:
       mode: always

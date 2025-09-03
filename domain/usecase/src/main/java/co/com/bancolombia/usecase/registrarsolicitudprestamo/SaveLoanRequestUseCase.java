@@ -49,4 +49,7 @@ public class SaveLoanRequestUseCase {
                                         })
                         ).onErrorMap(e -> new RuntimeException("Error al registrar la solicitud: " + e.getMessage(), e));
     }
+
+
+
 }

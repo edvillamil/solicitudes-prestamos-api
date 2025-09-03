@@ -22,7 +22,7 @@ class LoanRequestReactiveRepositoryAdapterTest {
     LoanRequestReactiveRepositoryAdapter repositoryAdapter;
 
     @Mock
-    SolicitudReactiveRepository repository;
+    LoanRequestReactiveRepository repository;
 
     @Mock
     ObjectMapper mapper;
