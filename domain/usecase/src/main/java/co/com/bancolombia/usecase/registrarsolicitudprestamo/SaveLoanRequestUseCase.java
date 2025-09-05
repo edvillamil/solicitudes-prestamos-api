@@ -23,7 +23,7 @@ public class SaveLoanRequestUseCase {
 
     private final String PENDING_REVIEW = "PENDING_REVIEW";
 
-    public Mono<LoanRequest> registrar(LoanRequest loanRequest) {
+    /*public Mono<LoanRequest> registrar(LoanRequest loanRequest) {
 
         Mono<User> userMono = userRepository.findByEmail(loanRequest.getEmail())
                 .switchIfEmpty(Mono.error(
@@ -48,8 +48,39 @@ public class SaveLoanRequestUseCase {
                                             return loanRequestRepository.save(loanRequest);
                                         })
                         ).onErrorMap(e -> new RuntimeException("Error al registrar la solicitud: " + e.getMessage(), e));
-    }
+    }*/
 
+
+    public Mono<LoanRequest> registrar(LoanRequest loanRequest) {
+
+
+
+
+        // 1) Validar que el usuario exista por email
+        return userRepository.findByEmail(loanRequest.getEmail())
+                .switchIfEmpty(Mono.error(new IllegalArgumentException(
+                        String.format("El cliente con email %s no existe", loanRequest.getEmail())
+                )))
+                // 2) Con el usuario en mano, validar loanType y estado en paralelo
+                .flatMap(user ->
+                        Mono.zip(
+                                loanTypeRepository.findById(loanRequest.getLoanType().getId())
+                                        .switchIfEmpty(Mono.error(new IllegalArgumentException("Tipo de préstamo no existe"))),
+                                loanStatusRepository.findByName(PENDING_REVIEW)
+                                        .switchIfEmpty(Mono.error(new IllegalStateException("Estado inicial no encontrado")))
+                        ).flatMap(tuple -> {
+                            var type = tuple.getT1();
+                            var status = tuple.getT2();
+
+                            loanRequest.setLoanType(type);
+                            loanRequest.setLoanStatus(status);
+                            loanRequest.setCreatedAt(LocalDateTime.now());
+
+                            return loanRequestRepository.save(loanRequest);
+                        })
+                )
+                .onErrorMap(e -> new RuntimeException("Error al registrar la solicitud: " + e.getMessage(), e));
+    }
 
 
 }

@@ -2,6 +2,7 @@ package co.com.bancolombia.r2dbc;
 
 import co.com.bancolombia.model.estado.LoanStatus;
 import co.com.bancolombia.r2dbc.entities.LoanStatusEntity;
+import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
@@ -16,5 +17,9 @@ public interface LoanStatusReactiveRepository
 
     Mono<LoanStatus> findByName(String name);
 
+    @Query("""
+         SELECT * FROM loan_status
+         WHERE id IN (:statuses)
+         """)
     Flux<LoanStatus> findAllById(List<UUID> statuses);
 }
