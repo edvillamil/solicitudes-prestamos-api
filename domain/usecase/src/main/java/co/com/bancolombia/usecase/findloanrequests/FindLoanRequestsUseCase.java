@@ -55,7 +55,7 @@ public class FindLoanRequestsUseCase {
                     UUID loanTypeId = lr.getLoanType().getId();
                     return loanTypeRepository.findById(loanTypeId)
                             .map(fullType -> {
-                                lr.setLoanType(fullType); // Ahora incluye el name
+                                lr.setLoanType(fullType);
                                 return lr;
                             });
                 });

@@ -103,6 +103,7 @@ public class Handler {
                                         dto.getSize(),
                                         dto.getStatuses())
                                 .collectList() // Mono<List<LoanRequest>>
+                                //mapear al response
                                 .flatMap(lista -> ServerResponse.ok()
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(lista))
