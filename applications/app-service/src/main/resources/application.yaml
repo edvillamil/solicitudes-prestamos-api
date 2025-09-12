@@ -4,15 +4,14 @@ spring:
   application:
     name: "solicitudes-prestamos-api"
   r2dbc:
-    url: r2dbc:pool:postgresql://localhost:5432/postgres?schema=public
-    username: admin
-    password: admin123
+    url: "r2dbc:pool:postgresql://localhost:5433/loans_db?schema=public"
+    username: "admin"
+    password: "admin123"
   sql:
     init:
-      mode: always
+      mode: "always"
   liquibase:
-    enabled: fals
-
+    enabled: "fals"
 management:
   endpoints:
     web:
@@ -31,6 +30,10 @@ adapter:
   restconsumer:
     timeout: 5000
     url: "http://localhost:8080/api/v1/usuarios"
+  sqs:
+    region: "us-east-1"
+    queueUrl: "http://localhost:4566/000000000000/sample"
+    endpoint: "http://localhost:4566 # For localstack only"
 resilience4j:
   circuitbreaker:
     instances:
